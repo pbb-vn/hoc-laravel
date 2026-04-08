@@ -26,3 +26,11 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts --ignore-platfo
 RUN chown -R www-data:www-data storage bootstrap/cache
 
 EXPOSE 80
+
+# Copy file entrypoint vào container
+COPY entrypoint.sh /usr/local/bin/
+# Cấp quyền thực thi
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Thiết lập file này chạy khi container khởi động
+ENTRYPOINT ["entrypoint.sh"]
